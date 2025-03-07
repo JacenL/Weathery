@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className="min-h-screen w-full transition-colors duration-700">
+      <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen w-full transition-colors duration-700`}>
         <div id="weather-effects" className="absolute inset-0 pointer-events-none"></div>
         <EffectHandler />
         <Navbar />
