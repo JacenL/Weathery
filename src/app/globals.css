@@ -1,24 +1,76 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.rain-drop {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    opacity: 0.7;
+    animation: rain-fall linear infinite;
   }
-}
+  
+  @keyframes rain-fall {
+    0% {
+      transform: translateY(-10px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
+.snowflake {
+    position: absolute;
+    top: 0;
+    width: 5px;
+    height: 5px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: snowfall linear infinite;
+  }
+  
+  @keyframes snowfall {
+    0% {
+      transform: translateY(-10px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+@keyframes flash {
+    0% { background-color: rgba(255, 255, 255, 0.8); }
+    100% { background-color: transparent; }
+  }
+  
+  .thunder-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    animation: flash 0.2s linear infinite alternate;
+  }
+  
+@keyframes fog-move {
+    0% { opacity: 0.3; transform: translateX(-5%); }
+    50% { opacity: 0.6; transform: translateX(5%); }
+    100% { opacity: 0.3; transform: translateX(-5%); }
+  }
+  
+  .fog-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(200, 200, 200, 0.2);
+    animation: fog-move 8s infinite alternate;
+  }
+  
