@@ -29,7 +29,7 @@ export default function Weather() {
       case "thunderstorm":
         return "bg-gray-900";
       case "snow":
-        return "bg-gray-300";
+        return "bg-white";
       case "default":
         return "bg-gray-900";
       default:
@@ -41,7 +41,7 @@ export default function Weather() {
     switch (condition.toLowerCase()) {
       case "clear":
       case "sunny":
-        return "text-yellow-900";
+        return "text-yellow-600";
       case "partly cloudy":
       case "partially cloudy":
         return "text-gray-800";
@@ -55,9 +55,9 @@ export default function Weather() {
       case "thunderstorm":
         return "text-gray-400";
       case "snow":
-        return "text-blue-900";
+        return "text-gray-300";
       default:
-        return "text-gray-200";
+        return "text-gray-300";
     }
   };
   
@@ -116,6 +116,12 @@ export default function Weather() {
     setLoading(false);
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleFetchWeather();
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center items-center text-center">
       <h1 className="text-gray-100 text-2xl font-bold mb-4">Current Weather</h1>
@@ -125,6 +131,7 @@ export default function Weather() {
           placeholder="Enter city..."
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          onKeyDown={handleKeyDown}
           className="text-gray-100 p-2 border rounded-lg"
         />
         <button

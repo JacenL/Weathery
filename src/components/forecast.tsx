@@ -18,6 +18,12 @@ export default function Forecast() {
     setLoading(false);
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleFetchForecast();
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center items-center text-center">
       <h1 className="text-gray-100 text-2xl font-bold mb-4">Weekly Weather Forecast</h1>
@@ -27,6 +33,7 @@ export default function Forecast() {
           placeholder="Enter city..."
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          onKeyDown={handleKeyDown}
           className="text-gray-100 p-2 border rounded-lg"
         />
         <button
