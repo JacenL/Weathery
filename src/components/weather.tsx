@@ -98,7 +98,13 @@ export default function Weather() {
     if (weatherData) {
       addWeatherEffect(condition);
     }
-  }, [weatherData]);
+    return () => {
+      const effectContainer = document.getElementById("weather-effects");
+      if (effectContainer) {
+        effectContainer.innerHTML = "";
+      }
+    };
+  }, [pathname, weatherData]);
 
   async function handleFetchWeather() {
     if (!city) return;
