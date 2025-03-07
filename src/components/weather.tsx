@@ -29,7 +29,7 @@ export default function Weather() {
       case "thunderstorm":
         return "bg-gray-900";
       case "snow":
-        return "bg-white";
+        return "bg-gray-300";
       case "default":
         return "bg-gray-900";
       default:
@@ -55,9 +55,9 @@ export default function Weather() {
       case "thunderstorm":
         return "text-gray-400";
       case "snow":
-        return "text-gray-300";
+        return "text-gray-600";
       default:
-        return "text-gray-300";
+        return "text-gray-500";
     }
   };
   
