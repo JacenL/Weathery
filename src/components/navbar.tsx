@@ -15,6 +15,9 @@ export default function Navbar() {
           <Link href="/forecast" className="hover:underline">
             Forecast
           </Link>
+          <Link href="/about" className="hover:underline">
+            About
+          </Link>
         </div>
       </div>
     </nav>
