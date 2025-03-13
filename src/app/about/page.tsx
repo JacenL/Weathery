@@ -1,8 +1,3 @@
-import About from "../../components/about";
-
-export default function AboutPage() {
-  return <About />;
-}
 "use client";
 
 import { motion } from "framer-motion";
