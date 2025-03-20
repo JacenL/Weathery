@@ -43,7 +43,7 @@ export default function Navbar() {
         </div>
         <div className="hidden md:flex space-x-10">
           <Link href="/" className="hover:underline">
-            Home
+            Current Weather
           </Link>
           <Link href="/forecast" className="hover:underline">
             Forecast

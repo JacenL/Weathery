@@ -1,6 +1,6 @@
 import Weather from "../components/weather";
 
-export default function Home() {
+export default function Current() {
   return (
     <div className="flex justify-center items-start min-h-screen">
       <div className="mt-10">

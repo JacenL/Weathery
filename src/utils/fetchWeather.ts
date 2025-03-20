@@ -1,9 +1,11 @@
 export interface WeatherData {
+    address: string;
     datetime: string;
     temp: number;
     tempmax: number;
     tempmin: number;
     humidity: number;
+    windspeed: number;
     conditions: string;
   }
   
@@ -21,7 +23,16 @@ export interface WeatherData {
       const data = await response.json();
   
       if (data.days && data.days.length > 0) {
-        return data.days[0];
+        return {
+          address: data.resolvedAddress,
+          datetime: data.days[0].datetime,
+          temp: data.days[0].temp,
+          tempmax: data.days[0].tempmax,
+          tempmin: data.days[0].tempmin,
+          humidity: data.days[0].humidity,
+          windspeed: data.days[0].windspeed,
+          conditions: data.days[0].conditions,
+        }
       } else {
         return null;
       }
