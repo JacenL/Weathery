@@ -3,13 +3,19 @@
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [city, setCity] = useState("");
+  const pathname = usePathname();
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      window.location.href = `/?city=${city}`;
+      let searchUrl = `/?city=${city}`;
+      if (pathname.startsWith("/forecast")) {
+        searchUrl = `/forecast?city=${city}`;
+      }
+      window.location.href = searchUrl;
     }
   };
 
