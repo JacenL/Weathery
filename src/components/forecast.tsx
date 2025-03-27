@@ -62,11 +62,9 @@ export default function Forecast() {
             Forecast for {cityName}
           </h2>
           <div className="mt-12 w-max min-h-screen flex justify-center">
-            {forecast.slice(1).map((day, index, arr) => {
+            {forecast.slice(1).map((day, index) => {
               const bg = getBackground(day.conditions);
               const offset = 15 + 1.25;
-              const isFirst = index === 0;
-              const isLast = index === arr.length - 1;
               return (
                 <div
                   key={`bg-${index}`}

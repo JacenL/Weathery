@@ -159,7 +159,7 @@ export default function Weather() {
         effectContainer.innerHTML = "";
       }
     };
-  }, [weatherData]);
+  }, [weatherData, bgClass]);
 
   return (
     <div className="flex flex-col justify-center items-center text-center min-h-screen relative">
