@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { fetchWeather, WeatherData } from "../utils/fetchWeather";
 import { useSearchParams } from "next/navigation";
+import { revCoord } from "../utils/revCoord";
 
 export default function Weather() {
   const searchParams = useSearchParams();
@@ -11,7 +12,6 @@ export default function Weather() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [textClass, setTextClass] = useState("text-gray-200");
   const [bgClass, setBgClass] = useState("bg-gray-900");
-  const [cityName, setCity] = useState(city);
 
   const getWeatherBackground = (condition: string) => {
     switch (condition.toLowerCase()) {
@@ -92,7 +92,31 @@ export default function Weather() {
 
   useEffect(() => {
     if (!city) {
-      console.warn("No city provided in URL, skipping fetch.");
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const { latitude, longitude } = position.coords;
+            const location = `${latitude},${longitude}`;
+            try {
+              const data = await fetchWeather(location);
+              if (data) {
+                const humanName = await revCoord(latitude, longitude);
+                if (humanName) {
+                  data.address = humanName;
+                }
+                setWeatherData(data);
+              }
+            } catch (error) {
+              console.error("Error fetching weather from location:", error);
+            }
+          },
+          (error) => {
+            console.warn("Geolocation permission denied", error);
+          }
+        );
+      } else {
+        console.warn("Geolocation not supported.");
+      }
       return;
     }
 
@@ -100,10 +124,8 @@ export default function Weather() {
       console.log(`Fetching weather for: ${city}`);
       try {
         const data = await fetchWeather(city);
-        console.log("Weather data received:", data);
         if (data) {
           setWeatherData(data);
-          setCity(data.address);
         }
       } catch (error) {
         console.error("Error fetching weather:", error);
@@ -145,7 +167,7 @@ export default function Weather() {
 
       {weatherData && (
         <div className={`-mt-12 ${textClass}`}>
-          <h1 className="text-2xl font-semibold mb-2">{cityName}</h1>
+          <h1 className="text-2xl font-semibold mb-2">{weatherData.address}</h1>
           <p>Temperature: {weatherData.temp}°C</p>
           <p>Max Temp: {weatherData.tempmax}°C</p>
           <p>Min Temp: {weatherData.tempmin}°C</p>
