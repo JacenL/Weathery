@@ -128,9 +128,18 @@ export default function LunarClock() {
                     );
                 })}
                 </div>
+
+                <p className="mt-2 text-white opacity-100">
+                    {new Date().toLocaleDateString(undefined, {
+                        weekday: "long",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                    })}
+                </p>
         
                 <p className="mt-4 text-lg text-white">
-                Current Moon Phase: {getPhaseName(phase)}
+                    Current Moon Phase: {getPhaseName(phase)}
                 </p>
             </>
             ) : (
