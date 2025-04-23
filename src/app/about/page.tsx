@@ -19,13 +19,23 @@ export default function About() {
         <div className="ml-10 mt-50">
             <h1 className="text-3xl font-bold mb-4 text-gray-600">About Weathery</h1>
             <motion.p
-            className="text-lg text-gray-500"
-            initial={{ opacity: 0, scale: 0.9 }} 
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 2, delay: 0.5 }}
-            >
-            Weathery is a weather forecasting application that provides accurate and up-to-date weather information.<br />
-            This website was built for the 2nd sprint in the Future of Programming Languages course.
+              className="text-lg text-gray-500"
+              initial={{ opacity: 0, scale: 0.9 }} 
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 2, delay: 0.5 }}
+              >
+              Weathery is a weather forecasting application that provides accurate and up-to-date weather information.<br />
+              It allows users to check the current weather conditions, view the weekly forecast for any city, and view moon phases.<br />
+              This website was built for the Future of Programming Languages course at {" "}
+              <a
+                href="https://mbhs.edu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 underline hover:text-gray-800"
+              >
+                MBHS
+              </a>
+              .
             </motion.p>
         </div>
       </motion.div>
