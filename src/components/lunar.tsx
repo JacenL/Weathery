@@ -4,20 +4,22 @@ import { useEffect, useState, ReactElement } from "react";
 import { fetchLunarPhase } from "@/utils/fetchLunar";
 
 export default function LunarClock() {
+    const [date, setDate] = useState(new Date());
     const [phase, setPhase] = useState<number | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [stars, setStars] = useState<ReactElement[]>([]);
 
     useEffect(() => {
         async function loadPhase() {
-            const phaseValue = await fetchLunarPhase("earth");
+            const formattedDate = date.toISOString().split("T")[0];
+            const phaseValue = await fetchLunarPhase("Earth", formattedDate);
             setPhase(phaseValue);
             setLoading(false);
         }
-        
+      
         loadPhase();
-    }, []);
-
+    }, [date]);
+      
     useEffect(() => {
       const newStars = Array.from({ length: 100 }).map((_, i) => {
         const top = Math.random() * 100;
@@ -129,17 +131,33 @@ export default function LunarClock() {
                 })}
                 </div>
 
-                <p className="mt-2 text-white opacity-100">
-                    {new Date().toLocaleDateString(undefined, {
+                <div className="flex items-center justify-center mt-1 mb-6 text-white">
+                    <button
+                        onClick={() => setDate((prev) => new Date(prev.getTime() - 86400000))}
+                        className="px-4 py-2 rounded-full border border-white text-white bg-white/10 hover:bg-white/20 shadow-white shadow-sm transition"
+                    >
+                        ←
+                    </button>
+
+                    <div className="text-sm w-60 text-center">
+                        {date.toLocaleDateString(undefined, {
                         weekday: "long",
                         year: "numeric",
                         month: "long",
                         day: "numeric",
-                    })}
-                </p>
+                        })}
+                    </div>
+
+                    <button
+                        onClick={() => setDate((prev) => new Date(prev.getTime() + 86400000))}
+                        className="px-4 py-2 rounded-full border border-white text-white bg-white/10 hover:bg-white/20 shadow-white shadow-sm transition"
+                    >
+                        →
+                    </button>
+                </div>
         
                 <p className="mt-4 text-lg text-white">
-                    Current Moon Phase: {getPhaseName(phase)}
+                    Moon Phase: {getPhaseName(phase)}
                 </p>
             </>
             ) : (
