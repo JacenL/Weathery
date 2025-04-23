@@ -73,4 +73,14 @@
     background: rgba(200, 200, 200, 0.2);
     animation: fog-move 8s infinite alternate;
   }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.9; }
+}
+
+.animate-twinkle {
+  animation: twinkle 3s infinite ease-in-out;
+}
+  
   

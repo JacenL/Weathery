@@ -47,12 +47,15 @@ export default function Navbar() {
             />
           </button>
         </div>
-        <div className="hidden md:flex space-x-10">
+        <div className="hidden md:flex space-x-10 mr-2">
           <Link href="/" className="hover:underline">
             Current Weather
           </Link>
           <Link href="/forecast" className="hover:underline">
             Forecast
+          </Link>
+          <Link href="/lunar" className="hover:underline">
+            Lunar Phases
           </Link>
           <Link href="/about" className="hover:underline">
             About

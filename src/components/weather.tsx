@@ -12,6 +12,7 @@ export default function Weather() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [textClass, setTextClass] = useState("text-gray-200");
   const [bgClass, setBgClass] = useState("bg-gray-900");
+  const [outfit, setOutfit] = useState<string>("");
 
   const getWeatherBackground = (condition: string) => {
     switch (condition.toLowerCase()) {
@@ -136,6 +137,21 @@ export default function Weather() {
   }, [city]);
 
   useEffect(() => {
+    if (weatherData) {
+      fetch("/api/outfit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ forecast: weatherData }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.suggestion) setOutfit(data.suggestion);
+        })
+        .catch((err) => console.error("Error getting outfit:", err));
+    }
+  }, [weatherData]);
+
+  useEffect(() => {
     if (!weatherData) {
       setBgClass("bg-gray-900");
       document.body.className = "min-h-screen w-full transition-colors duration-700 " + bgClass;
@@ -168,6 +184,11 @@ export default function Weather() {
       {weatherData && (
         <div className={`-mt-12 ${textClass}`}>
           <h1 className="text-2xl font-semibold mb-2">{weatherData.address}</h1>
+          {outfit && (
+            <div className="mt-4 max-w-xl mx-auto mb-4">
+              <p className="whitespace-pre-line">{outfit}</p>
+            </div>
+          )}
           <p>Temperature: {weatherData.temp}°C</p>
           <p>Max Temp: {weatherData.tempmax}°C</p>
           <p>Min Temp: {weatherData.tempmin}°C</p>
