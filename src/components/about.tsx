@@ -25,7 +25,8 @@ export default function About() {
             transition={{ duration: 2, delay: 0.5 }}
             >
             Weathery is a weather forecasting application that provides accurate and up-to-date weather information.<br />
-            This website was built for the 2nd sprint in the Future of Programming Languages course.
+            It allows users to check the current weather conditions, view the weekly forecast for any city, and view moon phases<br />
+            This website was built for the Future of Programming Languages course.
             </motion.p>
         </div>
       </motion.div>
