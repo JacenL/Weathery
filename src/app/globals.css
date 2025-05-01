@@ -83,4 +83,22 @@
   animation: twinkle 3s infinite ease-in-out;
 }
   
-  
+input[type="range"].custom-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.slide-expand {
+  transition-property: max-width, opacity;
+  transition-duration: 1000ms;
+}
+
+.group:hover .slide-expand {
+  transition-duration: 2000ms;
+}

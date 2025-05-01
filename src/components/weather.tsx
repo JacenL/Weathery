@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchWeather, WeatherData } from "../utils/fetchWeather";
 import { useSearchParams } from "next/navigation";
 import { revCoord } from "../utils/revCoord";
+import WeatherMusicPlayer from "../components/music";
 
 export default function Weather() {
   const searchParams = useSearchParams();
@@ -177,6 +178,7 @@ export default function Weather() {
     };
   }, [weatherData, bgClass]);
 
+  const mainCondition = weatherData?.conditions.split(",")[0].trim() || "Clear";
   return (
     <div className="flex flex-col justify-center items-center text-center min-h-screen relative">
       <div id="weather-effects" className="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
@@ -195,6 +197,8 @@ export default function Weather() {
           <p>Humidity: {weatherData.humidity}%</p>
           <p>Wind Speed: {weatherData.windspeed} km/h</p>
           <p>Conditions: {weatherData.conditions}</p>
+
+          <WeatherMusicPlayer condition={mainCondition} />
         </div>
       )}
     </div>
