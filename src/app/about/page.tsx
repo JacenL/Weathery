@@ -26,7 +26,7 @@ export default function About() {
               >
               Weathery is a weather forecasting application that provides accurate and up-to-date weather information.<br />
               It allows users to check the current weather conditions, view the weekly forecast for any city, and view moon phases.<br />
-              This website was built for the Future of Programming Languages course at {" "}
+              This website was built partially for the Future of Programming Languages course at {" "}
               <a
                 href="https://mbhs.edu"
                 target="_blank"
